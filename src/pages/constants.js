@@ -16,6 +16,7 @@ export const products = [
     initailPrice: 250,
     discountRate: 50,
     currentPrice: 125,
+    quantity: 0,
     thumbnails: [
       { thumnail: thumbnail1 },
       { thumnail: thumbnail2 },
@@ -37,6 +38,7 @@ export const products = [
     initailPrice: 250,
     discountRate: 30,
     currentPrice: 175,
+    quantity: 0,
     thumbnails: [
       { thumnail: thumbnail1 },
       { thumnail: thumbnail2 },
@@ -58,6 +60,7 @@ export const products = [
     initailPrice: 250,
     discountRate: 60,
     currentPrice: 100,
+    quantity: 0,
     thumbnails: [
       { thumnail: thumbnail1 },
       { thumnail: thumbnail2 },

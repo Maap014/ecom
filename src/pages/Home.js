@@ -11,14 +11,26 @@ const Home = () => {
     products.map((product) => product.productImage[0].image)
   );
   const [buttonType] = useState("quantity");
-  const [number, setNumber] = useState(0);
-  const handleIncrease = () => {
-    setNumber(number + 1);
+  const [quantity, setQuantity] = useState(
+    products.map((product) => product.quantity)
+  );
+  const handleIncrease = (productIndex) => {
+    setQuantity((currQuantity) =>
+      currQuantity.map((prevquantity, index) =>
+        index === productIndex ? quantity[productIndex] + 1 : prevquantity
+      )
+    );
   };
-  const handleDecrease = () => {
-    if (number === 0) {
-      return;
-    } else setNumber(number - 1);
+  const handleDecrease = (productIndex) => {
+    setQuantity((currQuantity) =>
+      currQuantity.map((prevquantity, index) =>
+        index === productIndex
+          ? quantity[productIndex] >= 1
+            ? quantity[productIndex] - 1
+            : 0
+          : prevquantity
+      )
+    );
   };
 
   const handleThumbnailClick = (productIndex, thumbIndex) => {
@@ -35,7 +47,7 @@ const Home = () => {
 
   return (
     <div className="1024:px-20">
-      <Nav quantity={number} cartImage={activeimg} />
+      <Nav quantity={quantity} cartImage={activeimg} />
       <main className="flex flex-col justify-center items-center">
         <div className="text-left px-4 py-4 640:px-6 ">
           <h3 className="font-semibold text-gray-500 text-sm w-full">
@@ -109,10 +121,10 @@ const Home = () => {
                     <div className="w-full 640:max-w-[200px] 1024:min-w-[200px]">
                       <Button
                         type={buttonType}
-                        buttonText={number}
+                        buttonText={quantity[productIndex]}
                         leadingIcon={<Minus className="hover:opacity-[0.5]" />}
-                        handleIncrease={handleIncrease}
-                        handleDecrease={handleDecrease}
+                        handleIncrease={() => handleIncrease(productIndex)}
+                        handleDecrease={() => handleDecrease(productIndex)}
                         trailingIcon={<Plus className="hover:opacity-[0.5]" />}
                       />
                     </div>
