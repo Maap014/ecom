@@ -14,7 +14,7 @@ export const Nav = ({ quantity, cartImage }) => {
     { title: "Contact", id: "contact" },
   ];
   const [activeNav, setActiveNav] = useState(homeNav[0].id);
-  const [showItem, setShowItems] = useState(true);
+  const [showItem, setShowItems] = useState(false);
 
   const TotalBill = () => {
     const costOfShoe = 125;
