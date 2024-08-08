@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Bin, Cart, Logo, Menu } from "../svg/svg";
+import { Bin, Cart, Close, Logo, Menu } from "../svg/svg";
 import clsx from "clsx";
 import imageAvatar from "../../assets/images/image-avatar.png";
 import { formatToDollar } from "../../utils/utils";
@@ -16,6 +16,7 @@ export const Nav = () => {
   ];
   const [activeNav, setActiveNav] = useState(homeNav[0].id);
   const [showItem, setShowItems] = useState(false);
+  const [showSideNav, setShowSiseNav] = useState(false);
   const { cartItems, clearCart, removeItem } = useContext(CartContext);
 
   const TotalBill = (item) => {
@@ -24,16 +25,29 @@ export const Nav = () => {
   };
 
   return (
-    <div className="w-full h-[94px]  1024:h-[82px] 1024:w-[calc(100%-160px)]">
+    <div className="w-full h-[94px] 1024:h-[82px] 1024:w-[calc(100%-160px)]">
       <div className="w-[inherit] flex justify-between items-center p-8 border-b-2 gap-7 1024:p-0 fixed z-50 1024:w-[inherit] bg-white">
         <div className="flex gap-6 w-full">
-          <div className="flex items-center 1024:hidden relative z-50">
-            <Menu />
+          <div
+            onClick={() => setShowSiseNav(!showSideNav)}
+            className={clsx(
+              showSideNav ? "z-50" : "",
+              "flex items-center 1024:hidden relative cursor-pointer"
+            )}
+          >
+            {showSideNav ? <Close /> : <Menu />}
           </div>
           <div className="1024:grid 1024:place-content-center">
             <Logo />
           </div>
-          <nav className="fixed bg-black/65 h-lvh w-full hidden top-0 left-0 1024:block 1024:relative 1024:bg-none 1024:h-max z-40">
+          <nav
+            className={clsx(
+              showSideNav
+                ? "block fixed bg-black/65 h-lvh w-full top-0 left-0"
+                : "hidden",
+              "1024:block 1024:relative 1024:bg-none 1024:h-max z-40"
+            )}
+          >
             <ul
               className="flex relative
             bg-white opacity-100 h-full w-4/6 pl-7 pt-24 flex-col items-start gap-5 font-bold z-40 1024:flex-row 1024:gap-4 1024:p-0 1024:text-gray-400 1024:font-semibold 1024:w-full 1024:justify-center 960:gap-10"
