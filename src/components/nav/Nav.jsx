@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Bin, Cart, Logo, Menu } from "../svg/svg";
 import clsx from "clsx";
 import imageAvatar from "../../assets/images/image-avatar.png";
 import { formatToDollar } from "../../utils/utils";
 import { Button } from "../button/CustomButton";
+import { CartContext } from "../context/cart";
 
-export const Nav = ({ quantity, cartImage }) => {
+export const Nav = ({ quantity, cartImage, onClick }) => {
   const homeNav = [
     { title: "Collections", id: "collections" },
     { title: "Men", id: "men" },
@@ -15,7 +16,7 @@ export const Nav = ({ quantity, cartImage }) => {
   ];
   const [activeNav, setActiveNav] = useState(homeNav[0].id);
   const [showItem, setShowItems] = useState(false);
-
+  const { cartItems } = useContext(CartContext);
   const TotalBill = () => {
     const costOfShoe = 125;
     const TotalCost = costOfShoe * quantity;
@@ -68,36 +69,45 @@ export const Nav = ({ quantity, cartImage }) => {
               <div className="border-b-[#10101026] border-b text-left px-4 py-5 text-[16x] text-black font-medium">
                 Cart
               </div>
-              {quantity >= 1 ? (
-                <div className="px-4 pb-3">
-                  <div className=" flex items-center justify-between py-4">
-                    <div className=" w-14 overflow-auto rounded-md">
-                      <img src={cartImage} alt="" />
+              {cartItems.length === 0 ? (
+                <div>
+                  <p className="text-nowrap text-[hsl(219_9%_45%)] text-center py-16">
+                    Your Cart is Empty{" "}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {cartItems.map((item, index) => (
+                    <div className="px-4 pb-3">
+                      <div className=" flex items-center justify-between py-4">
+                        <div className=" w-14 overflow-auto rounded-md">
+                          <img src={item.productImage[0].image} alt="" />
+                        </div>
+                        <div className="text-[hsl(219_9%_45%)]">
+                          <p>{item.name}</p>
+                          {console.log("quntiity", item.quantity)}
+                          <p className="text-left">
+                            {`${formatToDollar(item.currentPrice)}  x ${
+                              item.quantity
+                            }`}
+                            <span className="font-semibold text-black">
+                              {formatToDollar(TotalBill())}
+                            </span>
+                          </p>
+                        </div>
+                        <div onClick={onClick}>
+                          <Bin />
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-[hsl(219_9%_45%)]">
-                      <p>Fall Limited Edited Sneakers</p>
-                      <p className="text-left">
-                        {`${formatToDollar(125)}  x ${quantity}`}{" "}
-                        <span className="font-semibold text-black">
-                          {formatToDollar(TotalBill())}
-                        </span>
-                      </p>
-                    </div>
-                    <Bin />
-                  </div>
+                  ))}
                   <div className="w-full pb-5 ">
                     <Button
                       buttonText="Checkout"
                       className="text-nowrap hover:bg-[#f68121a9]"
                     />
                   </div>
-                </div>
-              ) : (
-                <div>
-                  <p className="text-nowrap text-[hsl(219_9%_45%)] text-center py-16">
-                    Your Cart is Empty
-                  </p>
-                </div>
+                </>
               )}
             </div>
           </div>
