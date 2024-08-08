@@ -28,12 +28,14 @@ export const Close = () => {
   );
 };
 
-export const Bin = () => {
+export const Bin = ({ className }) => {
   return (
     <svg
       width="14"
       height="16"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
+
       // xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <defs>
@@ -42,7 +44,7 @@ export const Bin = () => {
           id="a"
         />
       </defs>
-      <use fill="#C3CAD9" fill-rule="nonzero" href="#a" />
+      <use fill={className} fill-rule="nonzero" href="#a" />
     </svg>
   );
 };
