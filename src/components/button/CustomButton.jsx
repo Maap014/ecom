@@ -10,6 +10,7 @@ export const Button = ({
   className,
   handleIncrease,
   handleDecrease,
+  onClick,
 }) => {
   return (
     <div>
@@ -23,6 +24,7 @@ export const Button = ({
           trailingIcon ? "pr-4" : "",
           className
         )}
+        onClick={onClick}
       >
         {leadingIcon && (
           <span className="cursor-pointer" onClick={handleDecrease}>
