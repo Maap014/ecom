@@ -1,7 +1,6 @@
 export const Cart = () => {
   return (
     <svg
-      className="768:w-4 768:3 cursor-pointer"
       viewBox="0 0 22 20"
       width="22"
       height="20"

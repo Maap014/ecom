@@ -70,7 +70,17 @@ export const Nav = () => {
           </nav>
         </div>
         <div className="flex gap-2 360:gap-4 1024:gap-6 items-center relative">
-          <div onClick={() => setShowItems(!showItem)}>
+          <div
+            className="relative w-7 h-7 cursor-pointer"
+            onClick={() => setShowItems(!showItem)}
+          >
+            {cartItems.length >= 1 ? (
+              <span className="bg-[#f68121] w-4 h-4 rounded-full absolute -top-1.5 -right-0.5 z-10 text-white text-xs">
+                {cartItems.length}
+              </span>
+            ) : (
+              <></>
+            )}
             <Cart />
           </div>
           <div className="w-7 h-7 rounded-full 1024:w-9 1024:h-9 1024:hover:border-2 1024:hover:border-orange-500 cursor-pointer">
@@ -91,10 +101,10 @@ export const Nav = () => {
                 </div>
               ) : (
                 <div className="px-4 pb-3">
-                  <div className="h-full max-h-[176px] overflow-y-auto">
+                  <div className="h-full max-h-[176px] overflow-y-auto no-scrollbar">
                     {cartItems.map((item, index) => (
                       <div key={index}>
-                        <div className=" flex items-center justify-between py-4">
+                        <div className=" flex items-center justify-between py-4 px-1">
                           <div className=" w-14 overflow-auto rounded-md">
                             <img src={item.productImage[0].image} alt="" />
                           </div>
