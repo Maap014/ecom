@@ -1,10 +1,9 @@
 import { createContext, useState } from "react";
-import { products } from "../../pages/constants";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([products[0]]);
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product, productQuantity) => {
     const isInCart = cartItems.find((item) => item.id === product.id);

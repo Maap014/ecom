@@ -8,7 +8,7 @@ import { products } from "./constants";
 import { CartContext } from "../components/context/cart";
 
 const Home = () => {
-  const { addToCart, removeItem, clearCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [activeimg, setActiveImg] = useState(
     products.map((product) => product.productImage[0].image)
   );
@@ -51,13 +51,7 @@ const Home = () => {
 
   return (
     <div className="1024:px-20">
-      <Nav
-        onClick={() => {
-          products.map((product) => removeItem(product));
-        }}
-        quantity={quantity}
-        cartImage={activeimg}
-      />
+      <Nav />
       <main className="flex flex-col justify-center items-center">
         <div className="text-left px-4 py-4 640:px-6 ">
           <h3 className="font-semibold text-gray-500 text-sm w-full">
