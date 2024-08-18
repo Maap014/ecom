@@ -110,7 +110,7 @@ export const Nav = () => {
                           </div>
                           <div className="text-[hsl(219_9%_45%)]">
                             <p>{item.name}</p>
-                            <p className="text-left">
+                            <p>
                               {`${formatToDollar(item.currentPrice)}  x  ${
                                 item.quantity
                               }`}

@@ -6,9 +6,11 @@ import { Nav } from "../components/nav/Nav";
 import { formatToDollar } from "../utils/utils";
 import { products } from "./constants";
 import { CartContext } from "../components/context/cart";
+import { Modal } from "../components/modal/Modal";
 
 const Home = () => {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, addItem, required, existingItem } =
+    useContext(CartContext);
   const [activeimg, setActiveImg] = useState(
     products.map((product) => product.productImage[0].image)
   );
@@ -149,6 +151,9 @@ const Home = () => {
           );
         })}
       </main>
+      {required && <Modal type="QUANTITY_REQUIRED" />}
+      {addItem && <Modal type="ITEM_ADDED" />}
+      {existingItem && <Modal type="ITEM_EXISTS" />}
     </div>
   );
 };
